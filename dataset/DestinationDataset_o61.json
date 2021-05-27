@@ -1,0 +1,19 @@
+{
+	"name": "DestinationDataset_o61",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "order",
+				"fileSystem": "s3files"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

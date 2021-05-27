@@ -1,0 +1,19 @@
+{
+	"name": "Xml2csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Xml",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "sample.xml",
+				"container": "storage1"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
