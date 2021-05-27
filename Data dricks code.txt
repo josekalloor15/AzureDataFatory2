@@ -1,0 +1,37 @@
+#connection
+spark.conf.set("fs.azure.account.key.<storage account name>.blob.core.windows.net","<storage key>")
+
+
+( # we can use data frame or temp view
+#creating dataframe
+df=spark.read.format("csv").options(header='True',schema='True').load("wasbs://<container name>@<storage account name>.blob.core.windows.net/<file name>")
+df1=spark.read.format("csv").options(header='True').load("wasbs://<container name>@<storage account name>.blob.core.windows.net/<file name>")
+
+# perform union using data frames
+df4 = df.union(df1)
+df4.show()
+									OR
+#create TempView
+spark.read.format("csv").options(header='True',schema='True').load("wasbs://<container name>@<storage account name>.blob.core.windows.net/<file name>.csv").createOrReplaceTempView('new')
+spark.read.format("csv").options(header='True',schema='True').load("wasbs://<container name>@<storage account name>.blob.core.windows.net/<file name>.csv").createOrReplaceTempView('old')
+
+#joining 2 tables
+df3= spark.sql('SELECT * FROM old UNION SELECT * FROM new')
+
+# filtering duplicates
+from pyspark.sql.functions import*
+df3 = df3.groupby('PersonID','Name').agg(max('LastModifytime').alias('LastModifytime'))
+)
+#set properties
+properties= {
+ "user" : "gauri",
+ "password" : "******" }
+
+# url to connect to azure sql database you can get this from "Connection strings" from overview of sql data base
+url="jdbc:sqlserver://server20.database.windows.net:1433;database=charandatabase;user=admin2@server20;password={your_password_here};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;"
+
+# write data to azure sql database
+from pyspark.sql import *
+import pandas as pd
+myfinaldf = DataFrameWriter(df3)
+myfinaldf.jdbc(url=url, table= "final", mode ="overwrite", properties = properties)
