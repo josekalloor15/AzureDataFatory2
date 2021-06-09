@@ -61,7 +61,7 @@
 				]
 			},
 			{
-				"name": "Web1",
+				"name": "Web success mail",
 				"type": "WebActivity",
 				"dependsOn": [
 					{
@@ -78,7 +78,49 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-25.southindia.logic.azure.com:443/workflows/1b65cd9e4bc041b08e48a6f7e007851e/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=CRg3fKo16KQbR22DeLki8zYmrAO5CGkmXJHBaXxrjSU",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"body": {
+						"value": "{\n\"dataFactoryName\":\"@{pipeline().DataFactory}\",\n\"pipelineName\":\"@{pipeline().Pipeline}\",\n\"Subject\":\"DataFactory Pipeline Run\",\n\"message\":\"Successfully Runned\",\n\"EmailTo\":\"jose.antony2@wipro.com\"\n}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Web failure mail",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Copy data with notofication",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-00.southindia.logic.azure.com:443/workflows/4a3e3f8e77fe488cb237e759ebc60a41/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Mhwyxqt-skyfMB9jlX3gxqJ7Bb4veXXGkrV-mNU-8ag",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json"
+					},
+					"body": {
+						"value": "{\n\"dataFactoryName\":\"@{pipeline().DataFactory}\",\n\"pipelineName\":\"@{pipeline().Pipeline}\",\n\"Subject\":\"DataFactory Pipeline Run\",\n\"message\":\"Successfully Runned\",\n\"EmailTo\":\"jose.antony2@wipro.com\"\n}",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"annotations": []
