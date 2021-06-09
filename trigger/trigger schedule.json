@@ -1,0 +1,25 @@
+{
+	"name": "trigger schedule",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "check file",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 15,
+				"startTime": "2021-06-10T00:38:00Z",
+				"endTime": "2021-06-10T01:00:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
