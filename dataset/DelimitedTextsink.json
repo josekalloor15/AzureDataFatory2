@@ -11,6 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "csv.csv",
+				"folderPath": "cpy",
 				"container": "storage1"
 			},
 			"columnDelimiter": ",",
