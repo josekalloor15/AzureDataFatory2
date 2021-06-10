@@ -1,0 +1,32 @@
+{
+	"name": "sourcetxt",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Topgear.txt",
+				"container": "topgear"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Transaction_date",
+				"type": "String"
+			},
+			{
+				"name": "Transaction_amount",
+				"type": "String"
+			}
+		]
+	}
+}
